@@ -1,11 +1,23 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import styleImport from 'vite-plugin-style-import';
 // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> npm i @types/node -D
-import path, { resolve } from "path";
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    styleImport({
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: (name) => `vant/es/${name}/style/index`,
+        },
+      ],
+    }),
+  ],
   build: {
     assetsDir: "static/img/",
     rollupOptions: {
@@ -18,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"), // 设置 `@` 指向 `src` 目录
+      "@": path.resolve(__dirname, "src"), // 设置 `@` 指向 `src` 目录
     },
   },
   base: "./", // 设置打包路径
