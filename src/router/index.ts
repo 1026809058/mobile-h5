@@ -7,27 +7,11 @@
  * @FilePath: \project-framework\src\router\index.ts
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Layouts from '@/layouts/layouts.vue'
+import staticRoutes from '@/router/staticRoutes/index'
+import dynamicRoutes from '@/router/dynamicRoutes/index'
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/home.vue')
-  }
-  // {
-  //   path: '/',
-  //   component: Layouts,
-  //   redirect: '/home',
-  //   children: [
-  //     {
-  //       path: 'home',
-  //       name: 'home',
-  //       component: () => import('@/views/home.vue')
-  //     }
-  //   ]
-  // }
-]
+const routes: Array<RouteRecordRaw> = [...staticRoutes, ...dynamicRoutes]
+console.log('routes----', routes)
 
 const router = createRouter({
   history: createWebHashHistory(),
