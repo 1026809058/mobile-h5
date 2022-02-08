@@ -10,6 +10,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import { setupStore } from './store/index'
+//全局函数
+import globalFun from './utils/tool/globalFun'
 //全局组件注册
 import globalComponents from './components/globalComponents'
 //全局样式
@@ -24,5 +26,8 @@ import './assets/iconfont/iconfont.css'
   globalComponents(app)
   //vuex
   setupStore(app)
+  // 设置全局函数
+  globalFun(app)
+  // app.config.globalProperties.$axios=axios
   app.mount('#app')
 })()
